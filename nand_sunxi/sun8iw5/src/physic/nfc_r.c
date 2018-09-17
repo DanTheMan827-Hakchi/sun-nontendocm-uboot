@@ -465,7 +465,8 @@ __s32 _wait_dma_end_v2(__u8 rw, __u32 buf_cnt, __u32 buf_addr[], __u32 buf_size[
 	__s32 i, timeout = 0xfffff;
 	_ndfc_dma_desc_t *pdesc;
     
-    while ( (timeout--) && (!(NDFC_READ_REG_ST() & NDFC_DMA_INT_FLAG)) );
+	while ( (timeout--) && (!(NDFC_READ_REG_ST() & NDFC_DMA_INT_FLAG)) );
+	
 	if (timeout <= 0)
 	{
 	    if ( NdfcVersion == NDFC_VERSION_V2 ) {
@@ -1111,7 +1112,7 @@ __s32 _read_secs_in_page_mode(NFC_CMD_LIST  *rcmd,void *mainbuf, void *cachebuf,
 				{
 				    PHY_ERR(" _read_secs_in_page_mode error, NK mode, dma not finish \n");
 				    while(1);
-					return ret1;
+				    return ret1;
 				}
 			}
 
@@ -1177,7 +1178,7 @@ __s32 _read_secs_in_page_mode(NFC_CMD_LIST  *rcmd,void *mainbuf, void *cachebuf,
 				{
 				    PHY_ERR(" _read_secs_in_page_mode error, 1K mode, cmdfifo full \n");
 				    while(1);
-					return ret;
+				    return ret;
 				}
 				if (NdfcVersion == NDFC_VERSION_V1) {
 					/*set NDFC_REG_SECTOR_NUM*/
@@ -1224,8 +1225,8 @@ __s32 _read_secs_in_page_mode(NFC_CMD_LIST  *rcmd,void *mainbuf, void *cachebuf,
 					if (ret1)
 					{
 					    PHY_ERR(" _read_secs_in_page_mode error, 1K mode, dma not finish \n");
-				        while(1);
-						return ret1;
+					    while(1);
+					    return ret1;
 					}
 				}
 
@@ -1235,8 +1236,8 @@ __s32 _read_secs_in_page_mode(NFC_CMD_LIST  *rcmd,void *mainbuf, void *cachebuf,
 				if (ret){
 					_disable_ecc();
 					NDFC_WRITE_REG_SPARE_AREA(spareoffsetbak);
-			        PHY_ERR(" _read_secs_in_page_mode error, 1K mode, cmd not finish \n");
-				    while(1);
+					PHY_ERR(" _read_secs_in_page_mode error, 1K mode, cmd not finish \n");
+					while(1);
 					return ret;
 				}
 				/*get user data*/
@@ -2929,22 +2930,23 @@ __s32 _vender_get_param_otp_hynix(__u8 *para, __u8 *addr, __u32 count)
 
     }
 
-    if(error_flag)
+    if(error_flag) {
         ret = -1;
+    }
 
 	// send 0xFF cmd
 	cfg = (NDFC_SEND_CMD1 | NDFC_WAIT_FLAG| 0xff);
 	_wait_cmdfifo_free();
 	NDFC_WRITE_REG_CMD(cfg);
-    _wait_cmd_finish();
+	_wait_cmd_finish();
 
 	// send 0x38 cmd
 	cfg = (NDFC_SEND_CMD1 | NDFC_WAIT_FLAG | 0x38);
 	_wait_cmdfifo_free();
 	NDFC_WRITE_REG_CMD(cfg);
-    _wait_cmd_finish();
+	_wait_cmd_finish();
 
-    _exit_nand_critical();
+	_exit_nand_critical();
 	return ret;
 }
 

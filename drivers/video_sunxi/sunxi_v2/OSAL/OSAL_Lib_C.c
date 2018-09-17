@@ -31,7 +31,7 @@ void * OSAL_malloc(__u32 Size)
     addr = malloc(Size);
     if(addr)
     	memset(addr,0,Size);
-	return addr;
+    return addr;
 }
 
 void OSAL_free(void *pAddr)

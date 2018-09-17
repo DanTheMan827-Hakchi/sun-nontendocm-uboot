@@ -207,6 +207,6 @@ struct axp_power axp_power_instance_##axp_name			=             				 \
 extern int axp_power_init(void);
 extern int axp_power_ioctl(int cmd,void *arg);
 extern int axp_power_exit(void);
-extern inline int pm_bus_read(unsigned  char  chip, unsigned char addr, unsigned char* data);
-extern inline int pm_bus_write(unsigned char  chip, unsigned char addr, unsigned char data);
+extern int pm_bus_read(unsigned  char  chip, unsigned char addr, unsigned char* data);
+extern int pm_bus_write(unsigned char  chip, unsigned char addr, unsigned char data);
 #endif

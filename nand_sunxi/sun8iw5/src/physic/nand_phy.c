@@ -1535,8 +1535,9 @@ __s32 _read_sectors(struct boot_physical_param *readop,__u8 dma_wait_mode)
 				NFC_RandomEnable();
 				ret = NFC_Read(cmd_list, data_buf, sparebuf, dma_wait_mode , NDFC_PAGE_MODE);
 				NFC_RandomDisable();
-				if(ret == -ERR_ECC)
+				if(ret == -ERR_ECC) {
 					ret = NFC_Read(cmd_list, data_buf, sparebuf, dma_wait_mode , NDFC_PAGE_MODE);
+				}
 
 					/**************************************************************************************
 					* 1. add by Neil, from v2.09
@@ -2192,8 +2193,9 @@ __s32 _read_sectors_first(struct boot_physical_param *readop,__u8 dma_wait_mode)
 				NFC_RandomEnable();
 				ret = NFC_Read(cmd_list, data_buf, sparebuf, dma_wait_mode , NDFC_PAGE_MODE);
 				NFC_RandomDisable();
-				if(ret == -ERR_ECC)
+				if(ret == -ERR_ECC) {
 					ret = NFC_Read(cmd_list, data_buf, sparebuf, dma_wait_mode , NDFC_PAGE_MODE);
+				}
 
 					/**************************************************************************************
 					* 1. add by Neil, from v2.09
@@ -2600,9 +2602,10 @@ __s32 _read_sectors_v2_first(struct boot_physical_param *readop, __u8 dma_wait_m
 				//ret = NFC_Read(cmd_list, data_buf, sparebuf, dma_wait_mode , NDFC_PAGE_MODE);
 				ret = NFC_ReadSecs_v2(cmd_list, readop->mainbuf, sparebuf, readop->sectorbitmap);
 				NFC_RandomDisable();
-				if(ret == -ERR_ECC)
+				if(ret == -ERR_ECC) {
 					//ret = NFC_Read(cmd_list, data_buf, sparebuf, dma_wait_mode , NDFC_PAGE_MODE);
 					ret = NFC_ReadSecs_v2(cmd_list, readop->mainbuf, sparebuf, readop->sectorbitmap);
+				}
 
 					/**************************************************************************************
 					* 1. add by Neil, from v2.09

@@ -681,11 +681,11 @@ int sunxi_clock_set_corepll(int frequency, int core_vol)
     //延时，等待时钟稳定
     for(i=0; i<0x400; i++);
     //调整时钟频率
-	clk_get_pll_para(&pll_factor, frequency);
-	//回写PLL1
+    clk_get_pll_para(&pll_factor, frequency);
+    //回写PLL1
     reg_val = readl(CCM_PLL1_CPUX_CTRL);
     reg_val &= ~((0x03 << 16) | (0x1f << 8) | (0x03 << 4) | (0x03 << 0));
-	reg_val |=  (pll_factor.FactorP << 16) | (pll_factor.FactorN<<8) | (pll_factor.FactorK<<4) | (0 << 0) ;
+    reg_val |=  (pll_factor.FactorP << 16) | (pll_factor.FactorN<<8) | (pll_factor.FactorK<<4) | (0 << 0) ;
     writel(reg_val, CCM_PLL1_CPUX_CTRL);
     //延时，等待时钟稳定
 #ifndef CONFIG_A67_FPGA

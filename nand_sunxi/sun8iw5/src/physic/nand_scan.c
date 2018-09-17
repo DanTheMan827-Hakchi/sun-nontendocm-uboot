@@ -1042,15 +1042,15 @@ __s32  SCN_AnalyzeNandSystem(void)
     else 
     	NandSupportTwoPlaneOp = 0;
 	
-	/* record current driver cfg for two plane operation */
-	if (CFG_SUPPORT_MULTI_PLANE_PROGRAM == 0)
-		CurrentDriverTwoPlaneOPCfg = 0;
-	else {
-		if (NandSupportTwoPlaneOp)	
-			CurrentDriverTwoPlaneOPCfg = 1;
-		else 
-			CurrentDriverTwoPlaneOPCfg = 0;
-	}    
+    /* record current driver cfg for two plane operation */
+    if (CFG_SUPPORT_MULTI_PLANE_PROGRAM == 0)
+        CurrentDriverTwoPlaneOPCfg = 0;
+    else {
+        if (NandSupportTwoPlaneOp)	
+            CurrentDriverTwoPlaneOPCfg = 1;
+        else 
+            CurrentDriverTwoPlaneOPCfg = 0;
+    }    
     PHY_DBG("[SCAN_DBG] NandTwoPlaneOp: %d, DriverTwoPlaneOPCfg: %d, 0x%x \n", 
     	NandSupportTwoPlaneOp, CurrentDriverTwoPlaneOPCfg, ((NandIDNumber<<4)^0xffffffff));
     	

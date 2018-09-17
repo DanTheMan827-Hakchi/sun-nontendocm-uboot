@@ -81,7 +81,7 @@ void calc_src_coef2(u32 *div_M, u32 *fac_N, u32 freq)
 
 	freq = freq > 1440000000 ? 1440000000 : freq;
 
-	for(n = 0; n < 128; n++)
+	for(n = 0; n < 128; n++) {
 		for(m = 0; m < 16; m++)
 		{
 			temp = 24000000 * (n + 1) / (m + 1);
@@ -92,9 +92,10 @@ void calc_src_coef2(u32 *div_M, u32 *fac_N, u32 freq)
 				cur_val = temp;
 			}
 		}
+	}
 
-		*div_M = temp_m;
-		*fac_N = temp_n;
+	*div_M = temp_m;
+	*fac_N = temp_n;
 }
 
 void de_clk_init_pll(void)

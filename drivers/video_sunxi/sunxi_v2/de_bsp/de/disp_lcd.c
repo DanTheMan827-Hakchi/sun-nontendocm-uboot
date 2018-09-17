@@ -717,11 +717,11 @@ s32 lcd_clk_exit(struct disp_lcd* lcd)
 			}
 		}
 
-	if(lcdp->extra_clk.clk)
-		disp_al_lcd_clk_exit(lcdp->extra_clk.clk);
+		if(lcdp->extra_clk.clk)
+			disp_al_lcd_clk_exit(lcdp->extra_clk.clk);
 
-	if(lcdp->merge_clk.clk && (LCD_IF_EDP == lcdp->panel_info.lcd_if))
-		disp_al_lcd_clk_exit(lcdp->merge_clk.clk);
+		if(lcdp->merge_clk.clk && (LCD_IF_EDP == lcdp->panel_info.lcd_if))
+			disp_al_lcd_clk_exit(lcdp->merge_clk.clk);
 
 		lcdp->lcd_clk.enabled = 0;
 	}

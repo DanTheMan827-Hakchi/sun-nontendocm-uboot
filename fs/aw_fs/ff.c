@@ -2825,22 +2825,22 @@ FRESULT f_read (
 			if (cc) {							/* Read maximum contiguous sectors directly */
 				if (csect + cc > fp->fs->csize)	/* Clip at cluster boundary */
 					cc = fp->fs->csize - csect;
-					if(!will_read_start){
-						will_read_start = sect;
-						read_write_data = cc;
-						debug_size = cc;
-					}else if((will_read_start + read_write_data) == sect){
-						read_write_data += cc;
-						debug_size += cc;
+				if(!will_read_start){
+					will_read_start = sect;
+					read_write_data = cc;
+					debug_size = cc;
+				}else if((will_read_start + read_write_data) == sect){
+					read_write_data += cc;
+					debug_size += cc;
+				}else{
+					if (disk_read_fs(fp->fs->drv, mybuff, will_read_start, read_write_data) != RES_OK){
+						 ABORT(fp->fs, FR_DISK_ERR);
 					}else{
-						if (disk_read_fs(fp->fs->drv, mybuff, will_read_start, read_write_data) != RES_OK){
-							 ABORT(fp->fs, FR_DISK_ERR);
-						}else{
-							mybuff += read_write_data;
-							read_write_data = cc;
-							will_read_start = sect;
-						}
+						mybuff += read_write_data;
+						read_write_data = cc;
+						will_read_start = sect;
 					}
+				}
 
 #if 0
 				if (disk_read_fs(fp->fs->drv, rbuff, sect, (BYTE)cc) != RES_OK)

@@ -1015,7 +1015,7 @@ int gpio_request_early(void  *user_gpio_list, __u32 group_count_max, __s32 set_g
 //	__u32			   *tmp_group_port_addr;
 	volatile __u32     *tmp_group_func_addr = NULL,   *tmp_group_pull_addr = NULL;
 	volatile __u32     *tmp_group_dlevel_addr = NULL, *tmp_group_data_addr = NULL;
-	__u32  				port, port_num, pre_port_num, port_num_func, port_num_pull;
+	__u32  				port = 0, port_num = 0, pre_port_num = 0, port_num_func = 0, port_num_pull = 0;
 	__u32  				pre_port = 0x7fffffff, pre_port_num_func = 0x7fffffff;
     __u32  				pre_port_num_pull = 0x7fffffff;
 	__s32               i, tmp_val;

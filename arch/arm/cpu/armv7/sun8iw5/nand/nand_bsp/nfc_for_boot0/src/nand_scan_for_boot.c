@@ -158,13 +158,15 @@ __s32  BOOT_AnalyzeNandSystem(void)
 
    //read nand flash chip ID from boot chip
     result = PHY_ReadNandId(BOOT_CHIP_SELECT_NUM, tmpChipID);
-    if(result)
+    if(result) {
         return -1;
+    }
 
     //check nand ID
     result = _CheckNandID(tmpChipID);
-    if(result)
+    if(result) {
         return -1;
+    }
 
 
 	/*configure page size*/

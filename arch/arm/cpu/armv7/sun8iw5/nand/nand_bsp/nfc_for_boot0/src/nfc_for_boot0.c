@@ -1216,8 +1216,9 @@ __s32 _vender_get_param_otp_hynix(__u8 *para, __u8 *addr, __u32 count)
 
     }
 
-    if(error_flag)
+    if(error_flag) {
         ret = -1;
+    }
 
 	// send 0xFF cmd
 	cfg = (NFC_SEND_CMD1 | NFC_WAIT_FLAG| 0xff);
