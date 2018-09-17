@@ -76,7 +76,26 @@ int axp22_probe(void)
 	    {
 		return -1;
 	    }
-		//}
+	    
+	    // setting DCDC freq
+            if(axp_i2c_read(AXP22_ADDR, BOOT_POWER22_DCDC_FREQSET, &reg_value))
+            {
+                return -1;
+            }
+	    reg_value &= ~0xf;
+	   
+	    if(axp_i2c_write(AXP22_ADDR, BOOT_POWER22_DCDC_FREQSET, reg_value))
+            {
+                return -1;
+            } 
+
+            // Set DCDC working mode
+            reg_value = 0x86;
+            if(axp_i2c_write(AXP22_ADDR, BOOT_POWER22_DCDC_MODESET, reg_value))
+            {
+                return -1;
+            }
+
 	    return 0;
 	}
 

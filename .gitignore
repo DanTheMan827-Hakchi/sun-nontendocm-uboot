@@ -14,7 +14,7 @@
 *.swp
 *.patch
 *.bin
-
+.tags*
 #
 # Top-level generic files
 #
